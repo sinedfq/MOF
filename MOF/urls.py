@@ -22,5 +22,5 @@ import moneyFlow.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('MOF/', include(moneyFlow.urls))  
+    path('api/MOF/', include(moneyFlow.urls)),
 ]
