@@ -1,10 +1,12 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from moneyFlow.models import Transactions, Status
-from moneyFlow.seriallizers import TransactionsSerializer
+from django.shortcuts import render
+from django.views import View
+from django.http import JsonResponse
 
-class TransactionsView(APIView):
-    def get(self, request):
-        transactions = Transactions.objects.all()  # Получаем все транзакции
-        serializer = TransactionsSerializer(transactions, many=True)
-        return Response(serializer.data)
+from moneyFlow.models import Transactions, Status
+
+
+# Create your views here.
+class TransactionsView(View):
+    def get(self, request, *args, **kwargs):
+        transactions = list(Transactions.objects.all().values())
+        return JsonResponse(transactions, safe=False)  # Верните просто список

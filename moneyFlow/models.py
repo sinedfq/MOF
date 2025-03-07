@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 
 class Status(models.Model):
     name = models.CharField("Status Name", unique = True, max_length=50)
@@ -36,6 +37,12 @@ class Transactions(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Сумма", default= 0)
     comment = models.TextField(blank=True, null=True, verbose_name="Комментарий")
     
+    def clean(self):
+        super().clean()
+        if self.subcategory and self.category:
+            if self.subcategory.category != self.category:
+                raise ValidationError("Выбор подкатегории должен соответствовать выбранной категории.")
+
     def __str__(self):
         return f"Транзакция #{self.id} ({self.amount} руб.)"
 
