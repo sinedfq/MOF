@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import EditModal from './EditModal.vue'; // Импортируем модальное окно
 
 const props = defineProps({
   sortedTransactions: {
@@ -30,7 +29,14 @@ const openModal = (transaction) => {
       <span>{{ transaction.type?.name || 'Нет данных' }} </span>
       <span>{{ transaction.category?.name || 'Нет данных' }} </span>
       <span>{{ transaction.subcategory?.name || 'Нет данных' }} </span>
-      <button class="custom-button" @click="openModal(transaction)">Редактировать</button>
+      <nav>
+        <RouterLink
+  :to="{ name: 'edit', state: { transaction: transaction } }"
+  class="custom-button"
+>
+  Редактировать
+</RouterLink>
+      </nav>
       <button class="custom-button" @click ="onDeleteClick(transaction)" style="background-color: #FF7373">Удалить</button>
     </li>
   </ul>
