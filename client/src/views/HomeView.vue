@@ -25,15 +25,24 @@ function toggleSort(field) {
         isAsc.value = true;
     }
 }
+
+function onDeleteClick(transaction){
+    transStore.delTrans(transaction.id)
+}
+
 </script>
 
 <template>
     <h1>Главная страница</h1>
-    <button @click="toggleSort('created_date')">Сортировать по Дате Создания</button>
-    <button @click="toggleSort('type.name')">Сортировать по Типу</button>
-    <button @click="toggleSort('category.name')">Сортировать по Категории</button>
-    <button @click="toggleSort('subcategory.name')">Сортировать по Подкатегории</button>
+    <div style="margin-left: 600px;">
+        <button class = "custom-button" @click="toggleSort('created_date')">Сортировать по Дате Создания</button>
+        <button class = "custom-button" @click="toggleSort('type.name')">Сортировать по Типу</button>
+        <button class = "custom-button" @click="toggleSort('category.name')">Сортировать по Категории</button>
+        <button class = "custom-button" @click="toggleSort('subcategory.name')">Сортировать по Подкатегории</button>
+    </div>
 
     <!-- Используем новый компонент -->
-    <TransRow :sortedTransactions="sortedTransactions" />
+    <TransRow 
+        :sortedTransactions="sortedTransactions" 
+        :onDeleteClick="onDeleteClick" />
 </template>
