@@ -16,11 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 import moneyFlow
+from moneyFlow.api import TransactionsViewSet
 import moneyFlow.urls
+
+router = DefaultRouter()
+router.register(r'transitions', TransactionsViewSet, basename= "transition" )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/MOF/', include(moneyFlow.urls)),
+    path('api/MOF/', include([
+        path('', include('moneyFlow.urls')),
+        path('', include('smart_selects.urls')),
+    ])),
+    path('api/', include(router.urls))
 ]
