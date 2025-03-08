@@ -7,7 +7,7 @@ export const useTransactionsStore = defineStore('transactions', {
     }),
     actions: {
         async fetchTrans() {
-            const response = await fetch('api/transitions/'); // Измените URL на ваш
+            const response = await fetch('api/transitions/');
             this.transactions = await response.json();
         },
         async delTrans(transactionsId){
@@ -15,6 +15,23 @@ export const useTransactionsStore = defineStore('transactions', {
                 method: "DELETE"
             });
             await this.fetchTrans();      
-        }
+        },
+        async editTrans(transactionId, updatedData) {
+            try {
+              const response = await axios.patch(`/api/transitions/${transactionId}/`, updatedData, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+          
+              console.log("Данные успешно обновлены:", response.data);
+          
+              await this.fetchTransactions(); 
+          
+              return response.data;
+            } catch (error) {
+              console.error("Ошибка при обновлении транзакции:", error);
+            }
+          }
     },
 });

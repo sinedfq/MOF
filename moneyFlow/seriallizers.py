@@ -11,25 +11,26 @@ class TypeSerializer(serializers.ModelSerializer):
         model = Type
         fields = ['id', 'name']
 
-class CategorySerializer(serializers.ModelSerializer):
-    type = TypeSerializer(read_only=True)
-
-    class Meta:
-        model = Category
-        fields = ['id', 'name', 'type']
 
 class SubCategorySerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-
     class Meta:
         model = SubCategory
         fields = ['id', 'name', 'category']
 
-class TransactionsSerializer(serializers.ModelSerializer):
-    status = StatusSerializer(read_only=True)
-    category = CategorySerializer(read_only=True)
-    subcategory = SubCategorySerializer(read_only=True)
+
+class CategorySerializer(serializers.ModelSerializer):
     type = TypeSerializer(read_only=True)
+    subcategories = SubCategorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'type', 'subcategories']
+
+class TransactionsSerializer(serializers.ModelSerializer):
+    status = StatusSerializer()
+    category = CategorySerializer()
+    subcategory = SubCategorySerializer()
+    type = TypeSerializer()
 
     class Meta:
         model = Transactions

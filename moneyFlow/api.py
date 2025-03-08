@@ -1,6 +1,7 @@
 from moneyFlow.models import *
 from rest_framework import viewsets
-
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from moneyFlow.seriallizers import *
 
 class TransactionsViewSet(viewsets.ModelViewSet):
@@ -31,5 +32,21 @@ class StatusViewSet(viewsets.ModelViewSet):
 class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategorySerializer
-    def get_queryset(self):
-        return super().get_queryset()
+
+    @action(detail=False, methods=['get'], url_path='by-category/(?P<category_id>\d+)')
+    def by_category(self, request, category_id=None):
+        """
+        Получение подкатегорий по ID категории.
+        """
+        try:
+            # Преобразуем category_id в целое число
+            category_id = int(category_id)
+            # Фильтруем подкатегории по category_id
+            subcategories = SubCategory.objects.filter(category_id=category_id)
+            # Сериализуем данные
+            serializer = self.get_serializer(subcategories, many=True)
+            return Response(serializer.data)
+        except ValueError:
+            return Response({"error": "Invalid category_id"}, status=400)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)

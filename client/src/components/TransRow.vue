@@ -12,11 +12,6 @@ const props = defineProps({
   }
 });
 
-const editModalRef = ref(null); // Ссылка на модальное окно
-
-const openModal = (transaction) => {
-  editModalRef.value.openModal(transaction); // Открываем модальное окно и передаем данные
-};
 
 </script>
 
@@ -31,19 +26,17 @@ const openModal = (transaction) => {
       <span>{{ transaction.subcategory?.name || 'Нет данных' }} </span>
       <nav>
         <RouterLink
-  :to="{ name: 'edit', state: { transaction: transaction } }"
-  class="custom-button"
->
-  Редактировать
-</RouterLink>
+          :to="{ name: 'edit', params: { transactionId: transaction.id } }"
+          class="custom-button"
+        >
+          Редактировать
+        </RouterLink>
       </nav>
       <button class="custom-button" @click ="onDeleteClick(transaction)" style="background-color: #FF7373">Удалить</button>
     </li>
   </ul>
   <button class="custom-button" style="margin-left: 93%">Добавить</button>
 
-  <!-- Модальное окно -->
-  <EditModal ref="editModalRef" />
 </template>
 
 <style>

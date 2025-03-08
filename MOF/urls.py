@@ -25,7 +25,7 @@ import moneyFlow.urls
 router = DefaultRouter()
 router.register(r'transitions', TransactionsViewSet, basename= "transition" )
 router.register(r'categories', CategoriesViewSet, basename= "category")
-router.register(r'subcategories', SubCategoryViewSet, basename= "subcategory")
+router.register(r'subcategories', SubCategoryViewSet, basename="subcategory")
 router.register(r'types', TypeViewSet, basename= "type")
 router.register(r'status', StatusViewSet, basename= "status")
 
