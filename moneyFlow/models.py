@@ -15,18 +15,18 @@ class Type(models.Model):
     
 class Category(models.Model):
     name = models.CharField("Category Name", unique= True, max_length=125)
-
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name="Type", verbose_name="Тип")
     def __str__(self):
         return self.name
 
 class SubCategory(models.Model):
     name = models.CharField("SubCategory Name", unique = True, max_length= 125)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="subcategories", verbose_name="Категория")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="Category", verbose_name="Категория")
 
     def __str__(self):
         return self.name  
 
-# Create your models here.
+
 class Transactions(models.Model):
     created_date = models.DateTimeField("Create date", auto_now_add = True)
     updated_date = models.DateField("Update date", auto_now = True)

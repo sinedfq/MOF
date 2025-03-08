@@ -2,7 +2,7 @@
 import { onBeforeMount, ref, computed } from 'vue';
 import { useTransactionsStore } from '../stores/tranc';
 import _ from 'lodash';
-import TransRow from '@/components/TransRow.vue'; // Импортируем новый компонент
+import TransRow from '@/components/TransRow.vue';
 
 const transStore = useTransactionsStore();
 const isAsc = ref(true);
@@ -45,4 +45,12 @@ function onDeleteClick(transaction){
     <TransRow 
         :sortedTransactions="sortedTransactions" 
         :onDeleteClick="onDeleteClick" />
+    
+        <RouterLink
+          :to="{ name: 'add'}"
+          class="custom-button"
+        >
+          Добавить
+        </RouterLink>
+
 </template>

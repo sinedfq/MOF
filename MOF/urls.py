@@ -19,17 +19,17 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 import moneyFlow
-from moneyFlow.api import TransactionsViewSet
+from moneyFlow.api import *
 import moneyFlow.urls
 
 router = DefaultRouter()
 router.register(r'transitions', TransactionsViewSet, basename= "transition" )
+router.register(r'categories', CategoriesViewSet, basename= "category")
+router.register(r'subcategories', SubCategoryViewSet, basename="subcategory")
+router.register(r'types', TypeViewSet, basename= "type")
+router.register(r'status', StatusViewSet, basename= "status")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/MOF/', include([
-        path('', include('moneyFlow.urls')),
-        path('', include('smart_selects.urls')),
-    ])),
     path('api/', include(router.urls))
 ]
