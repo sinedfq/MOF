@@ -6,8 +6,9 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <div class="">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/edit">About</RouterLink>
+        <RouterLink to="/">
+          <label class = "custom-button">Главная</label>
+        </RouterLink>
       </nav>
     </div>
   </header>
@@ -16,5 +17,5 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-
+@import '@/assets/base.css';
 </style>
