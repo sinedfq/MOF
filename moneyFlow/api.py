@@ -9,6 +9,15 @@ class TransactionsViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionsSerializer
     def get_queryset(self):
         return Transactions.objects.all()
+    
+    def create(self, request, *args, **kwargs):
+        print("Received data:", request.data)  # Логируем входные данные
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print("Validation errors:", serializer.errors)  # Логируем ошибки
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoriesViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

@@ -35,8 +35,6 @@ const props = defineProps({
       <button class="custom-button" @click ="onDeleteClick(transaction)" style="background-color: #FF7373">Удалить</button>
     </li>
   </ul>
-  <button class="custom-button" style="margin-left: 93%">Добавить</button>
-
 </template>
 
 <style>

@@ -19,8 +19,8 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    type = TypeSerializer(read_only=True)
-    subcategories = SubCategorySerializer(many=True, read_only=True)
+    type = serializers.PrimaryKeyRelatedField(queryset=Type.objects.all())  # Доступно для записи
+    subcategories = SubCategorySerializer(many=True, read_only=True)  # Только для чтения
 
     class Meta:
         model = Category

@@ -45,4 +45,12 @@ function onDeleteClick(transaction){
     <TransRow 
         :sortedTransactions="sortedTransactions" 
         :onDeleteClick="onDeleteClick" />
+    
+        <RouterLink
+          :to="{ name: 'add'}"
+          class="custom-button"
+        >
+          Добавить
+        </RouterLink>
+
 </template>

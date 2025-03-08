@@ -116,12 +116,11 @@ onMounted(async () => {
 
 <template>
   <div>
-    <h1>Редактирование транзакции #{{ transactionId }}</h1>
-
-    <!-- Поле для суммы -->
+    <label>Редактирование транзакции #{{ transactionId }}</label>
     <div>
       <label for="amount">Сумма:</label>
       <input
+        style="width: 89%;"
         id="amount"
         v-model.number="transaction.amount"
         type="number"
@@ -181,7 +180,7 @@ onMounted(async () => {
     </div>
 
     <!-- Кнопка для сохранения -->
-    <button @click="saveTransaction">Сохранить</button>
+    <button class = "custom-button" style="margin-left: 90%;" @click="saveTransaction">Сохранить</button>
   </div>
 </template>
 
@@ -193,30 +192,77 @@ div {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 19px;
+  letter-spacing: 4px;
+  word-spacing: 1px;
+  color: #8c8c8c;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: uppercase;
 }
 
 input,
 select,
 textarea {
-  width: 100%;
+  max-width: 100%;
+  margin-left: 5%;
+  align-content: center;
+  width: 90%;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  animation: myAnim 0.5s ease-in;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+@keyframes myAnim {
+	0% {
+    margin-top: -5px;
+    scale: 0;
+		opacity: 0;
+	}
+	100% {
+    margin-top: 0px;
+    scale: 1;
+		opacity: 1;
+	}
 }
 
-button:hover {
-  background-color: #369f6e;
-}
+.custom-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    user-select: none;
+    color: #000000;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: #c3c3c3;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    margin-left: 10px;
+    margin-bottom: 10px;
+    }
+
+    .custom-button:hover {
+    transition: all 0.3s ease;
+    transform: translateY(-4px);
+    }
+
 </style>
