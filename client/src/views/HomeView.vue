@@ -33,7 +33,6 @@ function onDeleteClick(transaction){
 </script>
 
 <template>
-    <h1>Главная страница</h1>
     <div style="margin-left: 600px;">
         <button class = "custom-button" @click="toggleSort('created_date')">Сортировать по Дате Создания</button>
         <button class = "custom-button" @click="toggleSort('type.name')">Сортировать по Типу</button>
@@ -41,7 +40,8 @@ function onDeleteClick(transaction){
         <button class = "custom-button" @click="toggleSort('subcategory.name')">Сортировать по Подкатегории</button>
     </div>
 
-    <!-- Используем новый компонент -->
+    
+    
     <TransRow 
         :sortedTransactions="sortedTransactions" 
         :onDeleteClick="onDeleteClick" />

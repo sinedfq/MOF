@@ -3,17 +3,17 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from moneyFlow.seriallizers import *
+from rest_framework import status
 
 class TransactionsViewSet(viewsets.ModelViewSet):
     queryset = Transactions.objects.all()
     serializer_class = TransactionsSerializer
-    def get_queryset(self):
-        return Transactions.objects.all()
-    
+
     def create(self, request, *args, **kwargs):
         print("Received data:", request.data)  # Логируем входные данные
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
+            print("Data is valid, saving...")
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         print("Validation errors:", serializer.errors)  # Логируем ошибки

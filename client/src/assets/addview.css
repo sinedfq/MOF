@@ -1,0 +1,92 @@
+/* Общие стили для контейнера */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Автоматические колонки */
+    grid-auto-rows: auto;
+    /* Автоматическая высота строк */
+    gap: 20px;
+    /* Отступ между элементами */
+    padding: 20px;
+    /* Внутренний отступ контейнера */
+    margin-left: 10%;
+    /* Отступ слева */
+    align-items: start;
+    /* Выравнивание элементов по верхнему краю */
+}
+
+/* Стили для каждого компонента */
+.container>* {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container>*:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для RouterLink (если он используется внутри компонентов) */
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Стили для кнопок (если они используются внутри компонентов) */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Стили для полей ввода (если они используются внутри компонентов) */
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    color: #333333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}

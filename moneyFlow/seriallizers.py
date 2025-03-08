@@ -27,14 +27,26 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'type', 'subcategories']
 
 class TransactionsSerializer(serializers.ModelSerializer):
-    status = StatusSerializer()
-    category = CategorySerializer()
-    subcategory = SubCategorySerializer()
-    type = TypeSerializer()
+    # Для чтения
+    status = StatusSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    subcategory = SubCategorySerializer(read_only=True)
+    type = TypeSerializer(read_only=True)
+
+    # Для записи
+    status_id = serializers.PrimaryKeyRelatedField(queryset=Status.objects.all(), source='status', write_only=True)
+    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source='category', write_only=True)
+    subcategory_id = serializers.PrimaryKeyRelatedField(queryset=SubCategory.objects.all(), source='subcategory', write_only=True)
+    type_id = serializers.PrimaryKeyRelatedField(queryset=Type.objects.all(), source='type', write_only=True)
 
     class Meta:
         model = Transactions
-        fields = ['id', 'created_date', 'updated_date', 'status', 'category', 'subcategory', 'type', 'amount', 'comment']
+        fields = [
+            'id', 'created_date', 'updated_date', 
+            'status', 'category', 'subcategory', 'type',  # Для чтения
+            'status_id', 'category_id', 'subcategory_id', 'type_id',  # Для записи
+            'amount', 'comment'
+        ]
 
     def validate(self, data):
         """

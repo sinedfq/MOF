@@ -60,7 +60,6 @@ watch(
   }
 );
 
-// Добавление новой транзакции
 const addTransaction = async () => {
   try {
     // Проверяем, что все обязательные поля заполнены
@@ -74,40 +73,34 @@ const addTransaction = async () => {
       return;
     }
 
-    // Находим выбранные объекты по их ID
-    const selectedType = types.value.find(type => type.id === newTransaction.value.typeId);
-    const selectedCategory = categories.value.find(category => category.id === newTransaction.value.categoryId);
-    const selectedSubcategory = subcategories.value.find(subcategory => subcategory.id === newTransaction.value.subcategoryId);
-    const selectedStatus = statuses.value.find(status => status.id === newTransaction.value.statusId);
-
     // Подготовка данных для отправки
     const payload = {
+      status_id: newTransaction.value.statusId,  // Отправляем только ID
+      category_id: newTransaction.value.categoryId,  // Отправляем только ID
+      subcategory_id: newTransaction.value.subcategoryId,  // Отправляем только ID
+      type_id: newTransaction.value.typeId,  // Отправляем только ID
       amount: newTransaction.value.amount,
-      type: {
-        name: selectedType ? selectedType.name : '', // Используем имя типа
-      },
-      category: {
-        name: selectedCategory ? selectedCategory.name : '', // Используем имя категории
-        type: null, // Если нужно, можно передать тип
-      },
-      subcategory: {
-        name: selectedSubcategory ? selectedSubcategory.name : '', // Используем имя подкатегории
-        category: null, // Если нужно, можно передать категорию
-      },
-      status: {
-        name: selectedStatus ? selectedStatus.name : '', // Используем имя статуса
-      },
       comment: newTransaction.value.comment,
     };
 
-    // Отправка данных на сервер
-    const response = await axios.post('/api/transitions/', payload, {
+    console.log("Sending payload:", payload);  // Логируем данные перед отправкой
+
+    // Отправка данных на сервер с использованием fetch
+    const response = await fetch('/api/transitions/', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(payload),
     });
 
-    console.log('Транзакция успешно добавлена:', response.data);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Ошибка сервера: ${response.status} - ${JSON.stringify(errorData)}`);
+    }
+
+    const responseData = await response.json();
+    console.log('Транзакция успешно добавлена:', responseData);
 
     // Сброс формы
     newTransaction.value = {
@@ -125,7 +118,6 @@ const addTransaction = async () => {
     alert('Не удалось добавить транзакцию. Пожалуйста, попробуйте снова.');
   }
 };
-
 // Загружаем данные при монтировании компонента
 onMounted(async () => {
   await fetchInitialData();
@@ -133,10 +125,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-    <h2>Добавление новой Транзакции</h2>
-    <form @submit.prevent="addTransaction">
-      <div>
+  <div class="form-container">
+    <h2 class="form-title">Добавление новой Транзакции</h2>
+    <form @submit.prevent="addTransaction" class="transaction-form">
+      <div class="form-group">
         <label for="amount">Сумма:</label>
         <input
           id="amount"
@@ -144,14 +136,16 @@ onMounted(async () => {
           type="number"
           step="0.01"
           required
+          class="form-input"
         />
       </div>
-      <div>
+      <div class="form-group">
         <label for="type">Тип:</label>
         <select
           id="type"
           v-model="newTransaction.typeId"
           required
+          class="form-select"
         >
           <option value="" disabled>Выберите тип</option>
           <option
@@ -163,12 +157,13 @@ onMounted(async () => {
           </option>
         </select>
       </div>
-      <div>
+      <div class="form-group">
         <label for="category">Категория:</label>
         <select
           id="category"
           v-model="newTransaction.categoryId"
           required
+          class="form-select"
         >
           <option value="" disabled>Выберите категорию</option>
           <option
@@ -180,11 +175,12 @@ onMounted(async () => {
           </option>
         </select>
       </div>
-      <div>
+      <div class="form-group">
         <label for="subcategory">Подкатегория:</label>
         <select
           id="subcategory"
           v-model="newTransaction.subcategoryId"
+          class="form-select"
         >
           <option value="" disabled>Выберите подкатегорию</option>
           <option
@@ -196,12 +192,13 @@ onMounted(async () => {
           </option>
         </select>
       </div>
-      <div>
+      <div class="form-group">
         <label for="status">Статус:</label>
         <select
           id="status"
           v-model="newTransaction.statusId"
           required
+          class="form-select"
         >
           <option value="" disabled>Выберите статус</option>
           <option
@@ -213,14 +210,19 @@ onMounted(async () => {
           </option>
         </select>
       </div>
-      <div>
+      <div class="form-group">
         <label for="comment">Комментарий:</label>
         <textarea
           id="comment"
           v-model="newTransaction.comment"
+          class="form-textarea"
         ></textarea>
       </div>
-      <button type="submit">Добавить</button>
+      <button type="submit" class="form-button">Добавить</button>
     </form>
   </div>
 </template>
+
+<style scoped>
+@import '@/assets/base.css';
+</style>

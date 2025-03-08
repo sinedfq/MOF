@@ -34,14 +34,18 @@ const addType = async () => {
 </script>
 
 <template>
-  <div>
-    <h2>Добавление нового Типа</h2>
-    <form @submit.prevent="addType">
-      <div>
-        <label for="type">Тип:</label>
-        <input id="type" v-model="newType" required />
+  <div class = "form-container">
+    <h2 class="form-title">Добавление нового Типа</h2>
+    <form @submit.prevent="addType" class="transaction-form">
+      <div  class="form-group">
+        <label for="type" class = "form-label">Тип:</label>
+        <input id="type" v-model="newType" required class = "form-input" />
       </div>
-      <button type="submit">Добавить</button>
+      <button type="submit" class = "form-button">Добавить</button>
     </form>
   </div>
 </template>
+
+<style scoped>
+@import '@/assets/base.css';
+</style>

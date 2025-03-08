@@ -65,23 +65,25 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h2>Добавление новой Подкатегории</h2>
-    <form @submit.prevent="addSubcategory">
-      <div>
-        <label for="subcategoryName">Название подкатегории:</label>
+  <div class="form-container">
+    <h2 class="form-title">Добавление новой Подкатегории</h2>
+    <form @submit.prevent="addSubcategory" class="transaction-form">
+      <div  class="form-group">
+        <label for="subcategoryName" class = "form-label">Название подкатегории:</label>
         <input
           id="subcategoryName"
           v-model="newSubcategory.name"
           required
+          class = "form-input"
         />
       </div>
-      <div>
+      <div  class="form-group">
         <label for="subcategoryCategory">Категория:</label>
         <select
           id="subcategoryCategory"
           v-model="newSubcategory.categoryId"
           required
+          class = "form-select"
         >
           <option value="" disabled>Выберите категорию</option>
           <option
@@ -93,7 +95,11 @@ onMounted(() => {
           </option>
         </select>
       </div>
-      <button type="submit">Добавить</button>
+      <button type="submit" class = "form-button">Добавить</button>
     </form>
   </div>
 </template>
+
+<style scoped>
+@import '@/assets/base.css';
+</style>

@@ -34,14 +34,18 @@ const addStatus = async () => {
 </script>
 
 <template>
-  <div>
-    <h2>Добавление нового Статуса</h2>
-    <form @submit.prevent="addStatus">
-      <div>
-        <label for="status">Статус:</label>
-        <input id="status" v-model="newStatus" required />
+  <div class="form-container">
+    <h2 class="form-title">Добавление нового Статуса</h2>
+    <form @submit.prevent="addStatus" class="transaction-form">
+      <div class="form-group">
+        <label for="status" class = "form-label">Статус:</label>
+        <input id="status" v-model="newStatus" required class = "form-input" />
       </div>
-      <button type="submit">Добавить</button>
+      <button type="submit" class = "form-button">Добавить</button>
     </form>
   </div>
 </template>
+
+<style scoped>
+@import '@/assets/base.css';
+</style>
