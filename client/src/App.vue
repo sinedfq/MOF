@@ -16,6 +16,7 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
+<!-- Подключаем стили -->
 <style scoped>
 @import '@/assets/base.css';
 </style>

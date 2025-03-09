@@ -75,15 +75,14 @@ const addTransaction = async () => {
 
     // Подготовка данных для отправки
     const payload = {
-      status_id: newTransaction.value.statusId,  // Отправляем только ID
-      category_id: newTransaction.value.categoryId,  // Отправляем только ID
-      subcategory_id: newTransaction.value.subcategoryId,  // Отправляем только ID
-      type_id: newTransaction.value.typeId,  // Отправляем только ID
+      status_id: newTransaction.value.statusId,  
+      category_id: newTransaction.value.categoryId,  
+      subcategory_id: newTransaction.value.subcategoryId,  
+      type_id: newTransaction.value.typeId,  
       amount: newTransaction.value.amount,
       comment: newTransaction.value.comment,
     };
 
-    console.log("Sending payload:", payload);  // Логируем данные перед отправкой
 
     // Отправка данных на сервер с использованием fetch
     const response = await fetch('/api/transitions/', {
@@ -223,6 +222,7 @@ onMounted(async () => {
   </div>
 </template>
 
+<!-- Подключаем стили -->
 <style scoped>
 @import '@/assets/base.css';
 </style>

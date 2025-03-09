@@ -184,6 +184,7 @@ onMounted(async () => {
   </div>
 </template>
 
+<!-- Подключаем стили -->
 <style scoped>
 @import '@/assets/edit.css';
 </style>

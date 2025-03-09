@@ -16,6 +16,7 @@ import AddTransRow from '@/components/AddTransRow.vue';
   </div>
 </template>
 
+<!-- Подключаем стили -->
 <style>
 @import '@/assets/addview.css';
 </style>

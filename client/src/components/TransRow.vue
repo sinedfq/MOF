@@ -49,6 +49,7 @@ const props = defineProps({
   </ul>
 </template>
 
+<!-- Подключаем стили -->
 <style>
 @import '@/assets/home.css';
 </style>
