@@ -1,18 +1,11 @@
 /* Общие стили для контейнера */
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* Автоматические колонки */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-auto-rows: auto;
-    /* Автоматическая высота строк */
     gap: 20px;
-    /* Отступ между элементами */
     padding: 20px;
-    /* Внутренний отступ контейнера */
-    margin-left: 10%;
-    /* Отступ слева */
     align-items: start;
-    /* Выравнивание элементов по верхнему краю */
 }
 
 /* Стили для каждого компонента */

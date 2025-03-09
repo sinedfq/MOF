@@ -6,16 +6,19 @@ export const useTransactionsStore = defineStore('transactions', {
         transactions: [],
     }),
     actions: {
+        // Фетч запрос для получения данных из таблицы
         async fetchTrans() {
             const response = await fetch('api/transitions/');
             this.transactions = await response.json();
         },
+        // Фетч запрос для удаления данных из таблицы
         async delTrans(transactionsId){
             const response = await fetch(`api/transitions/${transactionsId}/`, {
                 method: "DELETE"
             });
             await this.fetchTrans();      
         },
+        // Фетч запрос для редактирования транзации
         async editTrans(transactionId, updatedData) {
             try {
               const response = await axios.patch(`/api/transitions/${transactionId}/`, updatedData, {

@@ -8,15 +8,18 @@ const transStore = useTransactionsStore();
 const isAsc = ref(true);
 const sortField = ref('created_date');
 
+// Загрузка данных из таблицы базы данных
 onBeforeMount(async () => {
     await transStore.fetchTrans();
 });
 
+// Сортировка данныз
 const sortedTransactions = computed(() => {
     const order = isAsc.value ? 'asc' : 'desc';
     return _.orderBy(transStore.transactions, [sortField.value], [order]);
 });
 
+// Активация сортировка в зависимости от передаваемого поля
 function toggleSort(field) {
     if (sortField.value === field) {
         isAsc.value = !isAsc.value;
@@ -26,6 +29,7 @@ function toggleSort(field) {
     }
 }
 
+// Вызов функции удаления транзакции по выбранному ID
 function onDeleteClick(transaction){
     transStore.delTrans(transaction.id)
 }
@@ -40,8 +44,6 @@ function onDeleteClick(transaction){
         <button class = "custom-button" @click="toggleSort('subcategory.name')">Сортировать по Подкатегории</button>
     </div>
 
-    
-    
     <TransRow 
         :sortedTransactions="sortedTransactions" 
         :onDeleteClick="onDeleteClick" />
