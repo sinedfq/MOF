@@ -61,6 +61,7 @@ npm run dev
 
 Главная страница(HomeView.vue)
 ![image](https://github.com/user-attachments/assets/afbd38d9-24b1-4d73-9cd6-64ea753c4231)
+*при желании можно добавить другие поля(тип, статус и т.д.)
 
 Страница редактирования транзакции(EditView.vue)
 ![image](https://github.com/user-attachments/assets/444105d3-dc9c-46bb-a764-a27da8ea749d)
